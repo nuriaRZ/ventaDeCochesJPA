@@ -6,6 +6,7 @@
 		<class>modelo.ventaDeCoches.Concesionario</class>
 		<class>modelo.ventaDeCoches.Fabricante</class>
 		<class>modelo.ventaDeCoches.Venta</class>
+		<class>modelo.ventaDeCoches.Sequence</class>
 		<properties>
            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/tutorialjavacoches?serverTimezone=Europe/Madrid"/>

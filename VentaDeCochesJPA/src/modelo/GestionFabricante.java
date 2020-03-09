@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import modelo.ventaDeCoches.Fabricante;
-import modelo.ventaDeCoches.controladores.ErrorBBDDException;
+
 import modelo.Utils;
 
 
@@ -22,7 +22,7 @@ public class GestionFabricante {
 	 * @throws ParseException 
 	 * 
 	 */
-	public static void menuGestion() throws ParseException, ErrorBBDDException {
+	public static void menuGestion()  {
 
 		int opcionElegida = -1;
 		do {
@@ -97,7 +97,7 @@ public class GestionFabricante {
 		em.close();
 	}
 	
-	private static void modificacion() throws ParseException, ErrorBBDDException {
+	private static void modificacion()  {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("VentaDeCoches");
 
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -106,31 +106,30 @@ public class GestionFabricante {
 			System.out.println("\n\tIntroduzca ID del fabricante ('-1' - ver listado, '0' - salir): ");
 			id = Utils.getIntConsola(-1);
 			if (id == -1) listado();
-			if (id == 0) Main.menuPrincipal();
+			
 			else {
-				TypedQuery<Fabricante> q = em.createQuery("SELECT f FROM Fabricante as f where f.id = "+ id, Fabricante.class);
+				TypedQuery<Fabricante> q = em.createQuery("SELECT f FROM Fabricante as f where f.id = "+ id+"'", Fabricante.class);
 				
 				List<Fabricante> fabricantes = q.getResultList();
 				
 				em.getTransaction().begin();
 				for (Fabricante fabEnLista : fabricantes) {
-					fabEnLista.setNombre("Modificado");
+					System.out.println("Introduzca 'CIF' para el Fabricante");
+					fabEnLista.setCif(Utils.getStringConsola());
+					System.out.println("Introduzca 'nombre' para el Fabricante");
+					fabEnLista.setNombre(Utils.getStringConsola());
 					em.persist(fabEnLista);
 				}
 				em.getTransaction().commit();
 				
 				em.close();
 			}
+			if (id == 0) Main.menuPrincipal();
 		}while(id != 0);
-		
-		
-		
-
-		
 		
 	}
 	
-	private static void baja() throws ParseException, ErrorBBDDException {
+	private static void baja()  {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("VentaDeCoches");
 
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -139,7 +138,7 @@ public class GestionFabricante {
 			System.out.println("\n\tIntroduzca ID del fabricante ('-1' - ver listado, '0' - salir): ");
 			id = Utils.getIntConsola(-1);
 			if (id == -1) listado();
-			if (id == 0) Main.menuPrincipal();
+			
 			else {
 				TypedQuery<Fabricante> q = em.createQuery("SELECT f FROM Fabricante as f where f.cif = '"+ id+"'", Fabricante.class);
 				
@@ -150,15 +149,16 @@ public class GestionFabricante {
 					em.remove(fabEnLista);
 				}
 				em.getTransaction().commit();
-				
-				
 				em.close();
+				System.out.println("El registro ha sido eliminado correctamente!");
 			}
+			if (id == 0) Main.menuPrincipal();
 		}while(id != 0);
 		
 		
 	}
 	
+
 	
 	
 	

@@ -7,12 +7,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 
-import modelo.ventaDeCoches.controladores.ErrorBBDDException;
-import modelo.ventaDeCoches.controladores.ImposibleConectarException;
+
 
 public class Main {
 	
-	public static void menuPrincipal() throws ParseException, ErrorBBDDException {
+	public static void menuPrincipal()  {
 		Scanner sc;
 		int opcion;
 		do {
@@ -38,10 +37,10 @@ public class Main {
 					GestionFabricante.menuGestion();
 				
 				case 2: 
-					
+					GestionConcesionario.menu();
 					
 				case 3:
-						
+					GestionCliente.menu();	
 				case 4:
 					
 				
@@ -63,7 +62,7 @@ public class Main {
 
 	}
 
-	public static void main(String[] args) throws ParseException, ErrorBBDDException {
+	public static void main(String[] args) throws ParseException {
 		
 			menuPrincipal();		
 	}
